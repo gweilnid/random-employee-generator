@@ -1,10 +1,9 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 function getRandomInt(min, max) {
-  // +1 je proto aby interval nebyl [min, max) ale [min, max]
+  // I add +1 to adjust the interval from [min, max) to [min, max)
   const DELTA = 1;
   return Math.floor(Math.random() * (max - min + DELTA) + min);
 }
-
 
 function getGender(){
   const genders = ["female", "male"];
@@ -12,19 +11,55 @@ function getGender(){
   return genders[getRandomInt(0,genders.length-1)];
 }
 
+function isLeapYear(year) {
+  return (year % 4 === 0) && (year % 100 !== 0 || year % 400 === 0);
+}
+
+function februaryCheck(day, month, year){
+  if (month === 1 && day === 29 && !isLeapYear(year)) {
+    console.log("HERE 1");
+    return 28;
+  }
+  return day;
+}
+
+function birthdayIntervalEdges(minYear, maxYear, currentDate, birthday){
+  const minAgeLimit = new Date(Date.UTC(currentDate.getUTCFullYear() - minYear,
+   currentDate.getUTCMonth(), currentDate.getUTCDate()));
+  const maxAgeLimit = new Date(Date.UTC(currentDate.getUTCFullYear() - maxYear,
+  currentDate.getUTCMonth(), currentDate.getUTCDate()));
+
+  if (birthday > minAgeLimit) {
+    birthday.setUTCFullYear(birthday.getUTCFullYear() - 1);
+    //console.log("HERE 2");
+  } 
+  else if (birthday < maxAgeLimit) {
+    birthday.setUTCFullYear(birthday.getUTCFullYear() + 1);
+    //console.log("HERE 3");
+  }
+}
+
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
 function getBirthday(minYear, maxYear){
-  const firstDay = 1;
-  const firstMonth = 0;
-  const lastMonth = 11;
-  const currentYear = new Date().getFullYear();
+  const currentDate = new Date();
+  const JANUARY = 0, FEBRUARY = 1, DECEMBER = 11;
+  const FIRST_DAY = 1;
+  const currentYear = currentDate.getUTCFullYear();
   const year = getRandomInt(currentYear -  maxYear, currentYear - minYear);
-  const month = getRandomInt(firstMonth, lastMonth);
-  const day = getRandomInt(firstDay, new Date(year, month + 1, 0).getDate());
+  const month = getRandomInt(JANUARY, DECEMBER);
+  // (year, month, last day of the month)
+  let day = getRandomInt(FIRST_DAY, new Date(year, month + 1, 0).getDate());
+
+  // If the date is February 29 in a non-leap year, decrement the day by one
+  day = februaryCheck(day, month, year);
   //console.log(year);
-  // Aby čas byl vždycky T00:00:00.000Z
+
+  // Using UTC to set the time to T00:00:00.000Z
   const birthday = new Date(Date.UTC(year, month, day));
-  
+
+  // Checks if the date is inside the correct interval
+  birthdayIntervalEdges(minYear, maxYear, currentDate, birthday);
+
   return birthday.toISOString();
 }  
 
@@ -80,6 +115,7 @@ function getWorkload(){
   const workloads = [10, 20, 30, 40];
   return workloads[getRandomInt(0, workloads.length-1)]
 }
+
 function main(dtoIn){
     
     let count = dtoIn.count;
@@ -88,7 +124,7 @@ function main(dtoIn){
     let dtoOut = [];
 
     if(count == 0){
-      return [];
+      return dtoOut;
     }
     else if(count < 0){
       throw new Error("Zadejte kladné číslo.");
@@ -211,7 +247,7 @@ function tests(){
   console.log("Test 6:");
   const maxCount = 100;
   const dtoIn6 = {
-    count:getRandomInt(1,maxCount),
+    count:getRandomInt(50,maxCount),
     age: {
       min: 18,
       max: 999
