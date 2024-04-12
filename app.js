@@ -28,9 +28,9 @@ function februaryCheck(day, month, year){
 
 function birthdayIntervalEdges(minYear, maxYear, currentDate, birthday){
   const minAgeLimit = new Date(Date.UTC(currentDate.getUTCFullYear() - minYear,
-   currentDate.getUTCMonth(), currentDate.getUTCDate()));
+    currentDate.getUTCMonth(), currentDate.getUTCDate()));
   const maxAgeLimit = new Date(Date.UTC(currentDate.getUTCFullYear() - maxYear,
-  currentDate.getUTCMonth(), currentDate.getUTCDate()));
+    currentDate.getUTCMonth(), currentDate.getUTCDate()));
 
   if (birthday > minAgeLimit) {
     birthday.setUTCFullYear(birthday.getUTCFullYear() - 1);
