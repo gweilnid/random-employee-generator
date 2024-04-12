@@ -1,6 +1,6 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 function getRandomInt(min, max) {
-  // I add +1 to adjust the interval from [min, max) to [min, max)
+  // I add +1 to adjust the interval from [min, max) to [min, max]
   const DELTA = 1;
   return Math.floor(Math.random() * (max - min + DELTA) + min);
 }
@@ -44,9 +44,10 @@ function birthdayIntervalEdges(minYear, maxYear, currentDate, birthday){
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date
 function getBirthday(minYear, maxYear){
-  const currentDate = new Date();
-  const JANUARY = 0, FEBRUARY = 1, DECEMBER = 11;
+  const JANUARY = 0, DECEMBER = 11;
   const FIRST_DAY = 1;
+
+  const currentDate = new Date();
   const currentYear = currentDate.getUTCFullYear();
   const year = getRandomInt(currentYear -  maxYear, currentYear - minYear);
   const month = getRandomInt(JANUARY, DECEMBER);
@@ -55,7 +56,6 @@ function getBirthday(minYear, maxYear){
 
   // If the date is February 29 in a non-leap year, decrement the day by one
   day = februaryCheck(day, month, year);
-  //console.log(year);
 
   // Using UTC to set the time to T00:00:00.000Z
   const birthday = new Date(Date.UTC(year, month, day));
