@@ -16,9 +16,10 @@ function isLeapYear(year) {
 }
 
 function februaryCheck(day, month, year){
+  const nonLeapLastDay = 28;
   if (month === 1 && day === 29 && !isLeapYear(year)) {
-    console.log("HERE 1");
-    return 28;
+    //console.log("HERE 1");
+    return nonLeapLastDay;
   }
   return day;
 }
