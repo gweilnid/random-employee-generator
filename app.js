@@ -16,10 +16,12 @@ function isLeapYear(year) {
 }
 
 function februaryCheck(day, month, year){
-  const nonLeapLastDay = 28;
-  if (month === 1 && day === 29 && !isLeapYear(year)) {
+  const NON_LEAP_LAST_DAY = 28;
+  const LEAP_LAST_DAY = 29;
+  const FEBRUARY = 1;
+  if (month === FEBRUARY && day === LEAP_LAST_DAY && !isLeapYear(year)) {
     //console.log("HERE 1");
-    return nonLeapLastDay;
+    return NON_LEAP_LAST_DAY;
   }
   return day;
 }
@@ -131,7 +133,7 @@ function main(dtoIn){
       throw new Error("Zadejte kladné číslo.");
     }
     else if(minAge < 18 || minAge > maxAge ){
-      throw new Error("Neplatný věk.");
+      throw new Error("Neplatný věkový intervál.");
     }
     else{
       for(let i = 0; i < count; i++){
