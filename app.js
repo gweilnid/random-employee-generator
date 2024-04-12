@@ -1,10 +1,10 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-function getRandomInt(min,max){
-  if(max - min <= 1){
-    return Math.round(Math.random() * (max - min) + min);
-  }
-  return Math.floor(Math.random() * (max - min) + min);
+function getRandomInt(min, max) {
+  // +1 je proto aby interval nebyl [min, max) ale [min, max]
+  const DELTA = 1;
+  return Math.floor(Math.random() * (max - min + DELTA) + min);
 }
+
 
 function getGender(){
   const genders = ["female", "male"];
@@ -24,16 +24,7 @@ function getBirthday(minYear, maxYear){
   //console.log(year);
   // Aby čas byl vždycky T00:00:00.000Z
   const birthday = new Date(Date.UTC(year, month, day));
-  /* Tady bych ještě použil timestamp aktuálního času a pak ošetřil 
-   * jestli náhodou zaměstnanec nemá například 36 let místo 35 nebo 17 místo 18
-   * i když je správný rok ale datumy jsou mimo požadovaný interval, dal bych do to rekurze.
-   */
-  const currentTimestamp = new Date().getTime();
-  const birthdayTimestamp = birthday.getTime();
-  if(currentTimestamp - birthdayTimestamp > maxYear || currentTimestamp - birthdayTimestamp < minYear){
-    console.log("Rekurze!!!!!!!");
-    return getBirthday(minYear, maxYear);
-  }
+  
   return birthday.toISOString();
 }  
 
@@ -102,7 +93,7 @@ function main(dtoIn){
     else if(count < 0){
       throw new Error("Zadejte kladné číslo.");
     }
-    else if(minAge < 18 ){
+    else if(minAge < 18 || minAge > maxAge ){
       throw new Error("Neplatný věk.");
     }
     else{
@@ -201,11 +192,25 @@ function tests(){
   } catch (error) {
     console.error(error.message);
   }
-  //------------------------------------------------------------------------------------------------
-  /*
+   //------------------------------------------------------------------------------------------------
   console.log("Test 5:");
-  const maxCount = 19;
   const dtoIn5 = {
+    count:128,
+    age: {
+      min: 20,
+      max: 19
+    }
+  }
+  try {
+    main(dtoIn5);
+  } catch (error) {
+    console.error(error.message);
+  }
+  //------------------------------------------------------------------------------------------------
+  
+  console.log("Test 6:");
+  const maxCount = 100;
+  const dtoIn6 = {
     count:getRandomInt(1,maxCount),
     age: {
       min: 18,
@@ -213,12 +218,12 @@ function tests(){
     }
   }
   try {
-    let dtoOut5 = main(dtoIn5);
-    printArray(dtoOut5);
+    let dtoOut6 = main(dtoIn6);
+    printArray(dtoOut6);
   } catch (error) {
     console.error(error.message);
   }
-  */
+  
 }
 
 tests();
