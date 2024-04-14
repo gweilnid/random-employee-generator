@@ -39,6 +39,7 @@ Pro každého (nového zaměstnance) index od 0 do dtoIn.count - 1:
 Vrať (pole zaměstnancu) dtoOut
 ```
 ## Pomocné Funkce
+```plaintext
 getRandomInt(min, max)
 Generuje náhodné celé číslo mezi min a max(včetně).
 
@@ -74,4 +75,4 @@ Je zadaný rok přestupný?
 
 birthdayIntervalEdges(minYear, maxYear, currentDate, birthday)
 Upravuje datum narození aby byl v platném intervalu.
-
+```
