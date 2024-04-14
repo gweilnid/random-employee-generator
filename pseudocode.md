@@ -36,8 +36,8 @@ Pro každého (nového zaměstnance) index od 0 do dtoIn.count - 1:
         Vytvoř a přidej zaměstnance voláním pomocných funkcí (
             gender: empGender,
             birthdate: getBirthday(minAge, maxAge),
-            name: getMaleName(),
-            surname: getMaleSurname(),
+            name: getFemaleName(),
+            surname: getFemaleSurname(),
             workload: getWorkload())
     Jinak:    
         Vytvoř a přidej zaměstnance voláním pomocných funkcí (
