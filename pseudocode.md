@@ -14,28 +14,38 @@ Tento skript generuje seznam zaměstnanců s náhodnými vlastnostmi podle počt
 
 ### Pseudokód
 ```plaintext
-Pokud (chtějí generovat 0 zaměstnanců) dtoIn.count == 0:
+Inicializce proměnných:
+let count = dtoIn.count;
+let minAge = dtoIn.age.min;
+let maxAge = dtoIn.age.max;
+let dtoOut = [];
+
+Pokud (chtějí generovat 0 zaměstnanců) count == 0:
     Vrať prázdné pole
 
-Pokud je záporný počet zaměstnanců dtoIn.count < 0:
+Pokud je záporný počet zaměstnanců count < 0:
     Vyhodí chybu "Zadejte kladné číslo."
 
-Pokud (minimální věk je větší než maximílní nebo nezletilí věk)dtoIn.age.min < 18 nebo dtoIn.age.min > dtoIn.age.max:
+Pokud (minimální věk je větší než maximílní nebo nezletilí věk) minAge < 18 || minAge > maxAge":
     Vyhodí chybu "Neplatný věkový intervál."
 
-Inicializuj prázdné pole dtoOut
 Pro každého (nového zaměstnance) index od 0 do dtoIn.count - 1:
     empGender = getGender()
     birthdate = getBirthday(dtoIn.age.min, dtoIn.age.max)
     Pokud empGender == "female":
-        name = getFemaleName()
-        surname = getFemaleSurname()
-    Jinak:
-        name = getMaleName()
-        surname = getMaleSurname()
-    workload = getWorkload()
-    Vytvoř zaměstnance voláním pomocných funkcí (gender, birthdate, name, surname, workload)
-    Přidej zaměstnance do pole dtoOut
+        Vytvoř a přidej zaměstnance voláním pomocných funkcí (
+            gender: empGender,
+            birthdate: getBirthday(minAge, maxAge),
+            name: getMaleName(),
+            surname: getMaleSurname(),
+            workload: getWorkload())
+    Jinak:    
+        Vytvoř a přidej zaměstnance voláním pomocných funkcí (
+            gender: empGender,
+            birthdate: getBirthday(minAge, maxAge),
+            name: getMaleName(),
+            surname: getMaleSurname(),
+            workload: getWorkload())
 Vrať (pole zaměstnancu) dtoOut
 ```
 ## Pomocné Funkce
