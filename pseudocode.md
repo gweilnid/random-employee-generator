@@ -2,9 +2,9 @@
 
 Tento skript generuje seznam zaměstnanců s náhodnými vlastnostmi podle počtu a věkového rozmezí ze vstupu.
 
-## Hlavní Funkce `main`
+## Pseudokód 
 
-### Parametry
+### Vstupní Parametry
 - `dtoIn`: Proměnná ze vstupu která obsahuje:
   - `count`: Počet zaměstnanců.
   - `age`: Minimální a maximální věk (`min`, `max`).
@@ -12,7 +12,7 @@ Tento skript generuje seznam zaměstnanců s náhodnými vlastnostmi podle počt
 ### Návratová Hodnota
 - Pole, kde každý index je zaměstnanec.
 
-### Pseudokód
+### Hlavní Funkce `main`
 ```plaintext
 Inicializce proměnných:
 let count = dtoIn.count;
