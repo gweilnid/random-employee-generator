@@ -37,7 +37,7 @@ Pro každého (nového zaměstnance) index od 0 do dtoIn.count - 1:
     Vytvoř zaměstnance voláním pomocných funkcí (gender, birthdate, name, surname, workload)
     Přidej zaměstnance do pole dtoOut
 Vrať (pole zaměstnancu) dtoOut
-
+```
 ## Pomocné Funkce
 getRandomInt(min, max)
 Generuje náhodné celé číslo mezi min a max(včetně).
